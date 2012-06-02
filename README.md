@@ -1,4 +1,7 @@
 NicheUtils
 ==========
 
-Utils for niche apps
+Utils for niche apps.
+
+
+.pm files for Perl programs.
