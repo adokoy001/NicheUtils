@@ -2,9 +2,10 @@ package mytimer;
 
 use Carp qw(croak);
 use strict;
-use Time::HiRes;
-use Time::Local;
+use Time::HiRes; # High resolution
+use Time::Local; # inverse 'localtime' function.
 
+# new sub.
 sub new{
   my $pkg = shift;
   bless{
@@ -20,6 +21,7 @@ sub new{
   },$pkg;
 }
 
+# set current timestamp into member variables.
 sub set_timestamp{
   my $self = shift;
   my $totalsec = time;
@@ -28,56 +30,67 @@ sub set_timestamp{
   $self->{month}++;
   $self->{totalsec} = $totalsec;
 }
+
+# start the 'STOP-Watch' function.
 sub start_watch{
   my $self = shift;
   $self->{hires01} = (Time::HiRes::time)[0];
 }
 
+# get date only Y,M,D array.
 sub get_date{
   my $self = shift;
   return($self->{year},$self->{month},$self->{day});
 }
 
+# get time only h,m,s array.
 sub get_time{
   my $self = shift;
   return($self->{hour},$self->{min},$self->{sec});
 }
 
+# get timestamp. Y,M,D,h,m,s array.
 sub get_timestamp{
   my $self = shift;
   return($self->{year},$self->{month},$self->{day},$self->{hour},$self->{min},$self->{sec});
 }
 
+# stop the 'STOP-Watch' function.
 sub stop_watch{
   my $self = shift;
   my $t = (Time::HiRes::time)[0];
   $self->{proct} = ($t - $self->{hires01});
 }
 
+# get timestamp with format YYYY-MM-DD hh:mm:ss strings.
 sub get_timestamp_str{
   my $self = shift;
   my $str = sprintf("%04d-%02d-%02d %02d:%02d:%02d",$self->{year},$self->{month},$self->{day},$self->{hour},$self->{min},$self->{sec});
   return($str);
 }
 
+# get timestamp with japanese format.
 sub get_timestamp_str_J{
   my $self = shift;
   my $str = sprintf("%04d年%02d月%02d日 %02d:%02d:%02d",$self->{year},$self->{month},$self->{day},$self->{hour},$self->{min},$self->{sec});
   return($str);
 }
 
+# get date with format YYYY-MM-DD
 sub get_date_str{
   my $self = shift;
   my $str = sprintf("%04d-%02d-%02d",$self->{year},$self->{month},$self->{day});
   return($str);
 }
 
+# get date with japanese format.
 sub get_date_str_J{
   my $self = shift;
   my $str = sprintf("%04d年%02d月%02d日",$self->{year},$self->{month},$self->{day});
   return($str);
 }
 
+# get time with format hh:mm:ss string.
 sub get_time_str{
   my $self = shift;
   my $str = sprintf("%02d:%02d:%02d",$self->{hour},$self->{min},$self->{sec});
