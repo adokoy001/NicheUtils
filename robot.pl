@@ -4,7 +4,7 @@
 
 use strict;
 use warnings;
-use Parallel::ForkManager;
+use Parallel::ForkManager; # Please install.
 use contentextract;
 use mytimer;
 
@@ -29,13 +29,10 @@ my $prec_no = '91';
 my $block_no = '47936';
 
 # Multi-Process
-# This sample will run 50 process.
+# This sample will run under 50 process.
 my $maxprocess = 50;
 
-
-
-
-
+# format
 my $header = 'TIME,PRESS_ACT,PRESS_SS,RAIN,TEMP,HYDRO,WIND_AVG,WIND_AVG_DIR,WIND_MAX,WIND_MAX_DIR,SUNLIGHT'."\n";
 
 my $pmdate = Parallel::ForkManager->new($maxprocess);
@@ -98,6 +95,7 @@ for(my $counter=0;$counter<$span;$counter++){
     $pmdate->finish;
 
 }
+# Wait child process.(required)
 $pmdate->wait_all_children;
 
 print "$span processes FINISHED\n";
@@ -106,7 +104,6 @@ sub make_url{
     my ($year,$month,$day,$prec_no,$block_no) = @_;
 
     my $url = 'http://www.data.jma.go.jp/obd/stats/etrn/view/10min_s1.php?prec_no='.$prec_no.'&block_no='.$block_no.'&year='.$year.'&month='.$month.'&day='.$day.'&elm=minutes&view=';
-
 
     return($url);
 }
