@@ -1,7 +1,15 @@
 NicheUtils
 ==========
 
-Utils for niche apps.
+Web scraper for Meteorological data from Japan Meteorological Agency.
+
+1.SETUP
+
+using plenv.
+
+$ plenv exec carton install
 
 
-.pm files for Perl programs.
+2. TEST RUN
+
+$ plenv exec carton exec -- perl robot.pl

@@ -1,7 +1,6 @@
 package contentextract;
 use strict;
 use LWP::UserAgent;
-use Crypt::SSLeay;
 use HTTP::Cookies; # for HTTP-Cookies simulation.
 use HTTP::Request::Common qw(POST);
 
